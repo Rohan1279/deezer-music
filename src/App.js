@@ -5,21 +5,25 @@ import { useEffect, useState } from 'react';
 import Player from './Components/Player/Player';
 
 function App() {
-  const [currentMusic, setCurrentMusic] = useState({})
+  const [currentMusic, setCurrentMusic] = useState([])
   const [query, setQuery] =useState('')
   const handleSearchedData = (searchedQuery) =>{
     setQuery(searchedQuery)
   }
   const handlePlayerSong = (selectedMusic) =>{
-    console.log('Before=> ',selectedMusic.title);
-    setCurrentMusic(selectedMusic)
-    console.log('After=> ',currentMusic.title);
+    // console.log('Before=> ',selectedMusic.title);
+    // setCurrentMusic(selectedMusic)
+    // console.log('After=> ',currentMusic.title);
+    setCurrentMusic(prevSelectedMusic=>{
+      return [selectedMusic, ...prevSelectedMusic]
+    })
+
   }
   return (
-    <div className="App">
+    <div className="App relative">
       <SearchInput onSearchInput={handleSearchedData}></SearchInput>
       <Musics query={query} onSelectPlayerSong={handlePlayerSong}></Musics>
-      {/* <Player currentMusic={currentMusic}></Player> */}
+      <Player currentMusic={currentMusic}></Player>
     </div>
   );
 }
