@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const Player = ({ currentMusic }) => {
   const { title, preview, md5_image } = currentMusic;
-  console.log(currentMusic)
-//   const [currentMusic, setCurrentMusic] = useState({})
-//   useEffect(()=>{
-//     setCurrentMusic(selectedMusic)
-//   },[selectedMusic])
-//   console.log(currentMusic);
-// console.log(selectedMusic)
+//   console.log(currentMusic)
   return (
-    <div className="h-48 bg-red-500 fixed  bottom-0">
+    <div className="h-48 bg-red-500 fixed  top-0">
       <img
         src={`https://e-cdn-images.dzcdn.net/images/cover/${md5_image}/264x264-000000-80-0-0.jpg`}
         alt=""

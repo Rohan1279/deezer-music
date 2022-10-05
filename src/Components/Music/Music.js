@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Music = ({ music,handlePlayer }) => {
+const Music = ({ music, onSelectMusic}) => {
   const { id, title, md5_image} = music;
-  // console.log(music);
+  const [selectedMusic, setSelectedMusic] = useState({})
+  const handlePlayer = (music) => {
+    setSelectedMusic(music)
+    onSelectMusic(music)
+  }
   
   return (
     <div className="mt-24" >
@@ -12,7 +16,7 @@ const Music = ({ music,handlePlayer }) => {
             src={`https://e-cdn-images.dzcdn.net/images/cover/${md5_image}/264x264-000000-80-0-0.jpg`}
             alt=""
             className="shadow-xl"
-            onClick={()=>handlePlayer(id)}
+            onClick={()=>handlePlayer(music)}
           />
           {/* <img src={music.artist.picture_xl} alt="" /> */}
         </figure>

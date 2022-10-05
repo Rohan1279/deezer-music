@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Music from "../Music/Music";
-const Musics = ({ query, onSelectSong }) => {
+const Musics = ({ query, onSelectPlayerSong }) => {
   const [musics, setMusics] = useState([]);
-  const [selectedMusic, setSelectedMusic] = useState({})
+  // const [selectedMusic, setSelectedMusic] = useState({})
+  // const [playerMusic, setPlayerMusic] = useState({})
+
   useEffect(() => {
     const options = {
       method: "GET",
@@ -15,20 +17,35 @@ const Musics = ({ query, onSelectSong }) => {
       .then((response) => response.json())
       .then((response) => setMusics(response.data))
       .catch((err) => console.error(err));
-  }, [query,selectedMusic]);
+  }, [query]);
   // console.log(musics)
-  const handlePlayer = (id) => {
-    const found = musics.find(music => music.id === id)
-    setSelectedMusic(found);
-    onSelectSong(selectedMusic);
+  // let playerMusic = {}
+  const handleSelectedSong = (music) => {
+    // const found = musics.find(music => music.id === id)
+    // setSelectedMusic(found);
+    
+    // setSelectedMusic(music);
+    // playerMusic = {...music}
+    onSelectPlayerSong(music)
+    // onSelectSong(selectedMusic);
+    // setSelectedMusic({})
   };
-  console.log(selectedMusic)
+  // console.log(playerMusic)
+
+  // useEffect(()=>{
+  //   setPlayerMusic(selectedMusic)
+  //   // console.log(playerMusic)
+  // },[selectedMusic, playerMusic])
+  // console.log(selectedMusic.title)
 
   // musics?.map(music => console.log(music))
   return (
     <div className="grid grid-cols-4">
-      {musics?.map((music) => (
-        <Music music={music} handlePlayer={handlePlayer} />
+      {musics?.map((music, idx) => (
+        <Music music={music} 
+        onSelectMusic={handleSelectedSong} 
+        key={idx}
+        />
       ))}
     </div>
   );
